@@ -10,7 +10,7 @@ class docker::repos {
       include apt
       # apt-transport-https is required by the apt to get the sources
       ensure_packages(['apt-transport-https'])
-      Package['apt-transport-https'] -> Apt::Source['docker']
+      Package['apt-transport-https'] -> Apt::Source <| title == 'docker' |>
       if $::operatingsystem == 'Debian' and $::lsbdistcodename == 'wheezy' {
         include apt::backports
       }
